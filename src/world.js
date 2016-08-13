@@ -24,19 +24,25 @@ class World {
     this.size = size;
     this.positions = new Array(size * size);
 
+    noise.seed(Math.random());
+
     for (var i = 0; i < this.size; i++) {
       for (var j = 0; j < this.size; j++) {
         var k = j * this.size;
-        var p = i + k;
-        this.positions[p] = new Position(p);
+        var p = new Position(i + k);
+        p.height = noise.perlin2(i / 100, j / 100);
+        this.positions[i + k] = p;
       }
     }
+    console.log(p);
+
+    console.log('positions = ', this.positions);
 
     this.canvasId = canvasId;
 
     var c2 = document.getElementById(this.canvasId);
-    c2.width = size * 2;
-    c2.height = size * 2;
+    c2.width = size * 4;
+    c2.height = size * 4;
   }
 
   /**
@@ -54,6 +60,7 @@ class World {
 
     var pixelData1 = new Array(this.size * this.size);
 
+    var imgData = ctx1.createImageData(this.size, this.size);
     for (var i = 0; i < this.size; i++) {
       for (var j = 0; j < this.size; j++) {
         var k = j * this.size;
@@ -67,17 +74,15 @@ class World {
         pixelData1[i + k].b = pixelData.b;
       }
     }
+    console.log(pixelData);
 
-    var imgData = ctx1.createImageData(this.size, this.size);
-    for (var i=0; i<imgData.data.length; i+=4) {
-      var x = (i/4) % this.size;
-      var y = 1;
-      //console.log('x', x);
-      //console.log('y', y);
-      imgData.data[i] = pixelData1[x * y].r;
-      imgData.data[i+1] = pixelData1[x * y].g;
-      imgData.data[i+2] = pixelData1[x * y].b;
-      imgData.data[i+3] = 255;
+    for (var i = 0; i < imgData.data.length; i+= 4) {
+        var j = i/4;
+
+        imgData.data[i] = pixelData1[j].r;
+        imgData.data[i+1] = pixelData1[j].g;
+        imgData.data[i+2] = pixelData1[j].b;
+        imgData.data[i+3] = 255;
     }
     ctx1.putImageData(imgData, 0, 0);
 
