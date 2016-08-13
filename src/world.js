@@ -89,6 +89,10 @@ class World {
       c1.height = this.size;
       var ctx1 = c1.getContext('2d');
 
+      if (ctx1 === null || ctx1 === undefined) {
+        throw 'ctx1 is null';
+      }
+
       var pixelData1 = new Array(this.size * this.size);
 
       var imgData = ctx1.createImageData(this.size, this.size);
