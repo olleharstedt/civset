@@ -7,6 +7,12 @@ class Position {
   posOnMap : number;
   height : number;
 
+  // attributes : Attribute<String, T>[] where T is a union
+  /*
+  class Attribute<S : string, T : string|number> {
+  }
+  */
+
   constructor(posOnMap : number) {
     this.posOnMap = posOnMap;
   }
@@ -24,3 +30,4 @@ class Position {
   }
 }
 exports.Position = Position;
+

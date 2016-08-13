@@ -1,7 +1,7 @@
 // @flow
 
 var P = require('./position.js');
-//var W = require('./worldpassinterface.js');
+var WP = require('./passes/worldpass.js');
 
 declare var noise : Object;
 
@@ -25,7 +25,7 @@ class World {
   /**
    * Array of passes that will be run on the positions
    */
-  passes : WorldPassInterface[];
+  passes : WP.WorldPass[];
 
   /**
    * @param {number} size Height of map (always a square)
@@ -51,10 +51,12 @@ class World {
     this.canvasId = canvasId;
 
     var c2 = document.getElementById(this.canvasId);
-
     if (c2 instanceof HTMLCanvasElement) {
       c2.width = size * 4;
       c2.height = size * 4;
+    }
+    else {
+      throw 'c2 is not a canvas';
     }
   }
 
@@ -62,10 +64,17 @@ class World {
    * Adds a world pass to this world.
    * @param {WorldPassInterface} wp
    */
-  addPass(wp : WorldPassInterface) {
+  addPass(wp : WP.WorldPass) {
     this.passes.push(wp);
     wp.run();
   }
+
+  // runPass(name : string)
+  // runAllPasses();
+  // sortPasses();  // Sort passes by dependencies
+  // pass types: height, water, erosion, weather, plant, animal
+  // each pass can add attribute(s) to Position.
+  // But what type does Position.attributes have? Union, then check with if instanceof ...
 
   /**
    * Draws the map on specified canvas id
