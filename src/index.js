@@ -1,6 +1,7 @@
 // @flow
 
 var W = require('./world.js');
+var PS = require('./passes/noiseheightpass.js');
 
 /**
  * Incremental game approx Settlers + Civilization
@@ -19,6 +20,11 @@ $(document).ready(function() {
   //Agent.updateAgentsTable();
 
   var world = new W.World(255, 'civset-map-canvas');
+
+  var heightPass = new PS.NoiseHeightPass(255);
+  world.addPass(heightPass);
+  world.runAllPasses();
+
   world.draw();
 
 });

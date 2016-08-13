@@ -10,7 +10,10 @@ declare var noise : Object;
  */
 class World {
 
-  positions : P.Position[];
+  /**
+   * Positions
+   */
+  positions : Array<P.Position>;
 
   /**
    * Size of map. Always square.
@@ -37,14 +40,12 @@ class World {
     this.positions = new Array(size * size);
     this.passes = [];
 
-    noise.seed(Math.random());
-
     for (var i = 0; i < this.size; i++) {
       for (var j = 0; j < this.size; j++) {
         var k = j * this.size;
         var p = new P.Position(i + k);
-        p.height = noise.perlin2(i / 100, j / 100);
         this.positions[i + k] = p;
+        //p.height = noise.perlin2(i / 100, j / 100);
       }
     }
 
@@ -66,11 +67,25 @@ class World {
    */
   addPass(wp : WP.WorldPass) {
     this.passes.push(wp);
-    wp.run();
+  }
+
+  /**
+   * Run all passes in unsorted order
+   * @return
+   */
+  runAllPasses() {
+    if (this.positions === undefined) {
+      throw 'positions is undefined';
+    }
+
+    var that = this;
+
+    $(this.passes).each(function(i : number, p : WP.WorldPass) {
+      p.run(that.positions);
+    });
   }
 
   // runPass(name : string)
-  // runAllPasses();
   // sortPasses();  // Sort passes by dependencies
   // pass types: height, water, erosion, weather, plant, animal
   // each pass can add attribute(s) to Position.
@@ -79,6 +94,7 @@ class World {
   /**
    * Draws the map on specified canvas id
    * Code copied from http://stackoverflow.com/questions/26692575/html5-canvas-fastest-way-to-display-an-array-of-pixel-colors-on-the-screen
+   * @todo Which pass/attribute to draw? Combine passes and draw them?
    * @return
    */
   draw() {

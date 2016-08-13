@@ -1,10 +1,12 @@
 // @flow
 
+var P = require('../position.js');
+
 /**
  * Base class for passes.
  */
 class WorldPass {
-  run() {
+  run(positions : P.Position[]) {
     throw 'Not implemented';
   }
 }
