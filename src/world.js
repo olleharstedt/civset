@@ -1,7 +1,7 @@
 /**
  * The world map
  */
-class Map {
+class World {
 
   positions : Position[];
 
@@ -23,6 +23,15 @@ class Map {
   constructor(size : number, canvasId : string) {
     this.size = size;
     this.positions = new Array(size * size);
+
+    for (var i = 0; i < this.size; i++) {
+      for (var j = 0; j < this.size; j++) {
+        var k = j * this.size;
+        var p = i + k;
+        this.positions[p] = new Position(p);
+      }
+    }
+
     this.canvasId = canvasId;
 
     var c2 = document.getElementById(this.canvasId);
@@ -48,10 +57,14 @@ class Map {
     for (var i = 0; i < this.size; i++) {
       for (var j = 0; j < this.size; j++) {
         var k = j * this.size;
+
+        var position = this.positions[i + k];
+        var pixelData = position.getPixelData();
+
         pixelData1[i + k] = {};
-        pixelData1[i + k].r = i;
-        pixelData1[i + k].g = j;
-        pixelData1[i + k].b = 255;
+        pixelData1[i + k].r = pixelData.r;
+        pixelData1[i + k].g = pixelData.g;
+        pixelData1[i + k].b = pixelData.b;
       }
     }
 
@@ -75,5 +88,3 @@ class Map {
     ctx2.drawImage(c1, 0, 0, this.size * 2, this.size * 2);
   }
 }
-
-module.exports = Map;

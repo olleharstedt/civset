@@ -9,20 +9,6 @@
  * @author Olle Härstedt
  */
 
-import Map from "./map.js";
-
-/**
- * Position of an agent, building, resource, ...
- */
-class Position {
-  x : number;
-  y : number;
-  content : {};
-
-  constructor() {
-  }
-}
-
 /**
  * A resource. Inanimate.
  */
@@ -45,7 +31,7 @@ class Agent {
    * 
    */
   constructor() {
-    this.pos = new Position(0, 0);
+    this.pos = new Position();
 
     // Add to agents array
     Agent.agents.push(this);
@@ -74,7 +60,7 @@ $(document).ready(function() {
 
   console.log('end');
 
-  var map = new Map(256, 'civset-map-canvas');
-  map.draw();
+  var world = new World(255, 'civset-map-canvas');
+  world.draw();
 
 });
