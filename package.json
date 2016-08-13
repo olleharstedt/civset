@@ -4,6 +4,7 @@
     "flow": "flow; test $? -eq 0 -o $? -eq 2"
   },
   "devDependencies": {
-    "flow-bin": "~0.30.0"
+    "flow-bin": "~0.30.0",
+    "babelify": "~7.3.0"
   }
 }

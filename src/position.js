@@ -1,3 +1,4 @@
+// @flow
 /**
  * Position of an agent, building, resource, ...
  */
@@ -6,14 +7,14 @@ class Position {
   posOnMap : number;
   height : number;
 
-  constructor(posOnMap) {
+  constructor(posOnMap : number) {
     this.posOnMap = posOnMap;
   }
 
   /**
    * Pixel representation of this position
    */
-  getPixelData() {
+  getPixelData() : Object {
     var c = Math.abs(this.height) * 255;
     return {
       r: c,
@@ -21,5 +22,5 @@ class Position {
       b: c
     };
   }
-
 }
+exports.Position = Position;

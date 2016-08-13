@@ -1,5 +1,7 @@
 // @flow
 
+var W = require('./world.js');
+
 /**
  * Incremental game approx Settlers + Civilization
  *
@@ -13,13 +15,12 @@ $(document).ready(function() {
 
   console.log('here');
 
-  var agent = new Agent();
-
-  Agent.updateAgentsTable();
+  //var agent = new Agent();
+  //Agent.updateAgentsTable();
 
   console.log('end');
 
-  var world = new World(255, 'civset-map-canvas');
+  var world = new W.World(255, 'civset-map-canvas');
   world.draw();
 
 });
