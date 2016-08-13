@@ -1,20 +1,37 @@
 // @flow
 
 /**
+ * Incremental game approx Settlers + Civilization
+ *
+ * Babel: babel --watch=./src --out-dir=./build
+ *
+ * @since 2016-08-5
+ * @author Olle Härstedt
+ */
+
+import Map from "./map.js";
+
+/**
  * Position of an agent, building, resource, ...
  */
 class Position {
   x : number;
   y : number;
+  content : {};
 
-  constructor(x : number, y : number) {
-    this.x = x;
-    this.y = y;
+  constructor() {
   }
 }
 
 /**
- * 
+ * A resource. Inanimate.
+ */
+class Resource {
+  type : string;
+}
+
+/**
+ * Agents move
  */
 class Agent {
   pos : Position;
@@ -51,18 +68,13 @@ $(document).ready(function() {
 
   console.log('here');
 
-  function initWorld() {
-    var world = new Array(10);
-    for (var i = 0; i < 100; i++) {
-      world[i] = new Array(100);
-    }
-    world[0][0] = {asd: 'qwe'};
-  }
-
-  initWorld();
-
   var agent = new Agent();
 
   Agent.updateAgentsTable();
+
+  console.log('end');
+
+  var map = new Map(256, 'civset-map-canvas');
+  map.draw();
 
 });
