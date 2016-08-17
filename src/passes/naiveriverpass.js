@@ -21,12 +21,11 @@ class NaiveRiverPass extends WP.WorldPass {
    * @param {P.Position[]} positions
    */
   run(positions : P.Position[]) {
-    for (var i = 0; i < this.size; i++) {
-      for (var j = 0; j < this.size; j++) {
-        var k = j * this.size;
-        var p = positions[i + k];
-        p.water = 1;
-      }
+    var i = Math.floor(this.size / 2);
+    for (var j = 0; j < this.size; j++) {
+      var k = j * this.size;
+      var p = positions[i + k];
+      p.set('water',  1);
     }
   }
 

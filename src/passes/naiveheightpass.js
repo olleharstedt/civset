@@ -31,3 +31,5 @@ class NaiveHeightPass extends WP.WorldPass {
   }
 
 }
+
+exports.NaiveHeightPass = NaiveHeightPass

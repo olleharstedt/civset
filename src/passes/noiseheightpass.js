@@ -11,8 +11,6 @@ declare var noise : Object;
  */
 class NoiseHeightPass extends WP.WorldPass {
 
-  size : number;
-
   constructor(size : number) {
     super();
     this.size = size;
