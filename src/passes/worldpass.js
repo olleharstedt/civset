@@ -9,11 +9,17 @@ class WorldPass {
 
   size : number;
 
+  /**
+   * Run the pass
+   */
   run(positions : P.Position[]) {
     throw 'Not implemented';
   }
 
-  getPixelData() : P.PixelData {
+  /**
+   * Get pixel data at this position
+   */
+  getPixelData(pos : number) : P.PixelData {
     throw 'Not implemented';
   }
 

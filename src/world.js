@@ -92,7 +92,8 @@ class World {
   // But what type does Position.attributes have? Union, then check with if instanceof ...
 
   /**
-   * Draws the map on specified canvas id
+   * Draws the map on specified canvas id.
+   * Draws all passes.
    * Code copied from http://stackoverflow.com/questions/26692575/html5-canvas-fastest-way-to-display-an-array-of-pixel-colors-on-the-screen
    * @todo Which pass/attribute to draw? Combine passes and draw them?
    * @return
@@ -128,6 +129,10 @@ class World {
           var position = this.positions[i + k];
           var pixelData = position.getPixelData();
 
+          // Get pixel data for each pass
+          // foreach pass
+          //   px = pass.getPixelData(position, pixelData, i + k);
+
           pixelData1[i + k] = {};
           pixelData1[i + k].r = pixelData.r;
           pixelData1[i + k].g = pixelData.g;
@@ -160,6 +165,13 @@ class World {
     }
 
   }
+
+  /**
+   * Draw a single pass
+   */
+  drawPass(passName : string) {
+  }
+
 }
 
 exports.World = World;
