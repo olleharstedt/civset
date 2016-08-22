@@ -1,9 +1,9 @@
 // @flow
 
-var W = require('./world.js');
-var PS = require('./passes/noiseheightpass.js');
-var NHP = require('./passes/naiveheightpass.js');
-var NRP = require('./passes/naiveriverpass.js');
+var World = require('./world.js').World;
+var NoiseHeightPass = require('./passes/noiseheightpass.js').NoiseHeightPass;
+var NaiveHeightPass = require('./passes/naiveheightpass.js').NaiveHeightPass;
+var NaiveRiverPass = require('./passes/naiveriverpass.js').NaiveRiverPass;
 
 /**
  * Incremental game approx Settlers + Civilization
@@ -21,24 +21,22 @@ $(document).ready(function() {
   //var agent = new Agent();
   //Agent.updateAgentsTable();
 
-  var world = new W.World(255, 'civset-map-canvas');
+  var world = new World(255, 'civset-map-canvas');
 
   var config = {
     size: 255,
     passes: [
       {
-        name: 'NaiveHeightPass',
-        module: 'NHP'
+        name: 'NaiveHeightPass'
       },
       {
-        name: 'NaiveRiverPass',
-        module: 'NRP'
+        name: 'NaiveRiverPass'
       }
     ]
   };
 
   $(config.passes).each(function(i, pass) {
-    var str = '(new ' + pass.module + '.' + pass.name + '(' + config.size + '))';
+    var str = '(new ' + pass.name + '(' + config.size + '))';
     var c = eval(str);
     world.addPass(c);
   });
