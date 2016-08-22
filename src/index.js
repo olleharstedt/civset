@@ -23,16 +23,36 @@ $(document).ready(function() {
 
   var world = new W.World(255, 'civset-map-canvas');
 
+  var config = {
+    size: 255,
+    passes: [
+      {
+        name: 'NaiveHeightPass',
+        module: 'NHP'
+      },
+      {
+        name: 'NaiveRiverPass',
+        module: 'NRP'
+      }
+    ]
+  };
+
+  $(config.passes).each(function(i, pass) {
+    var str = '(new ' + pass.module + '.' + pass.name + '(' + config.size + '))';
+    var c = eval(str);
+    world.addPass(c);
+  });
+
   /*
   var heightPass = new PS.NoiseHeightPass(255);
   world.addPass(heightPass);
   world.runAllPasses();
   */
 
-  var heightPass = new NHP.NaiveHeightPass(255);
-  var riverPass = new NRP.NaiveRiverPass(255);
-  world.addPass(heightPass);
-  world.addPass(riverPass);
+  //var heightPass = new NHP.NaiveHeightPass(255);
+  //var riverPass = new NRP.NaiveRiverPass(255);
+  //world.addPass(heightPass);
+  //world.addPass(riverPass);
   world.runAllPasses();
 
   world.draw();
