@@ -1,12 +1,12 @@
 // @flow
 
-var WP = require('./worldpass.js');
+var WorldPass = require('./worldpass.js').WorldPass;
 var P = require('../position.js');
 
 /**
  * Naive, meaning one straight river
  */
-class NaiveRiverPass extends WP.WorldPass {
+class NaiveRiverPass extends WorldPass {
 
   /**
    * @param {number} size
@@ -27,6 +27,11 @@ class NaiveRiverPass extends WP.WorldPass {
       var p = positions[i + k];
       p.set('water',  1);
     }
+  }
+
+  getPixelData(pos : P.Position) : P.PixelData {
+    var pd = new P.PixelData(155, 155, 155);
+    return pd;
   }
 
 }

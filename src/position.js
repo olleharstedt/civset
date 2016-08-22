@@ -5,10 +5,10 @@ type attributes = {[key: string] : number};
  * @todo Make a type when it's possible to export
  */
 class PixelData {
-  r : number;
-  g : number;
-  b : number;
-  constructor(r : number, g : number, b : number) {
+  r : ?number;
+  g : ?number;
+  b : ?number;
+  constructor(r : ?number, g : ?number, b : ?number) {
     this.r = r;
     this.g = g;
     this.b = b;

@@ -19,7 +19,7 @@ class WorldPass {
   /**
    * Get pixel data at this position
    */
-  getPixelData(pos : number) : P.PixelData {
+  getPixelData(pos : P.Position) : P.PixelData {
     throw 'Not implemented';
   }
 

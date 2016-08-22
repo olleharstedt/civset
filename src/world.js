@@ -128,15 +128,18 @@ class World {
 
           var position = this.positions[i + k];
           var pixelData = position.getPixelData();
+          pixelData1[i + k] = {};
 
           // Get pixel data for each pass
           // foreach pass
           //   px = pass.getPixelData(position, pixelData, i + k);
+          $(this.passes).each(function(i : number, pass : WP.WorldPass) {
+            pass.getPixelData(position);
+            pixelData1[i + k].r = pixelData.r;
+            pixelData1[i + k].g = pixelData.g;
+            pixelData1[i + k].b = pixelData.b;
+          });
 
-          pixelData1[i + k] = {};
-          pixelData1[i + k].r = pixelData.r;
-          pixelData1[i + k].g = pixelData.g;
-          pixelData1[i + k].b = pixelData.b;
         }
       }
       console.log(pixelData);
@@ -144,10 +147,21 @@ class World {
       for (var i = 0; i < imgData.data.length; i+= 4) {
           var j = i/4;
 
-          imgData.data[i] = pixelData1[j].r;
-          imgData.data[i+1] = pixelData1[j].g;
-          imgData.data[i+2] = pixelData1[j].b;
+          var r = pixelData1[j].r;
+          if (r != null) {
+            imgData.data[i] = r;
+          }
+          var g = pixelData1[j].g;
+          if (g != null) {
+            imgData.data[i+1] = g;
+          }
+          var b = pixelData1[j].b;
+          if (b != null) {
+            imgData.data[i+2] = b;
+          }
+
           imgData.data[i+3] = 255;
+
       }
       ctx1.putImageData(imgData, 0, 0);
 
