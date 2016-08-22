@@ -35,9 +35,9 @@ class World {
    * @param {string} canvasId
    * @return {Map}
    */
-  constructor(size : number, canvasId : string) {
-    this.size = size;
-    this.positions = new Array(size * size);
+  constructor(config : Object, canvasId : string) {
+    this.size = config.size;
+    this.positions = new Array(this.size * this.size);
     this.passes = [];
 
     for (var i = 0; i < this.size; i++) {
@@ -53,8 +53,8 @@ class World {
 
     var c2 = document.getElementById(this.canvasId);
     if (c2 instanceof HTMLCanvasElement) {
-      c2.width = size * 4;
-      c2.height = size * 4;
+      c2.width = this.size * 4;
+      c2.height = this.size * 4;
     }
     else {
       throw 'c2 is not a canvas';

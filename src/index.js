@@ -21,7 +21,6 @@ $(document).ready(function() {
   //var agent = new Agent();
   //Agent.updateAgentsTable();
 
-  var world = new World(255, 'civset-map-canvas');
 
   var config = {
     size: 255,
@@ -34,6 +33,8 @@ $(document).ready(function() {
       }
     ]
   };
+
+  var world = new World(config, 'civset-map-canvas');
 
   $(config.passes).each(function(i, pass) {
     var str = '(new ' + pass.name + '(' + config.size + '))';
